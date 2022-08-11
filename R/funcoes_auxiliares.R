@@ -1,7 +1,5 @@
 # Bibliotecas
-#library(png)
 library(magick)
-#library(bigstatsr)
 library(beepr)
 library(glue)
 library(pbapply)
@@ -12,8 +10,8 @@ library(pbmcapply)
 rm(list = ls(all = TRUE))
 
 # Chamando arquivos
-source("rede.R")
-source("genetic.R")
+source("R/rede.R")
+source("R/genetic.R")
 
 # Os recrusos (entrada da rede):
 #   1 - Posição atual do carro
@@ -192,31 +190,30 @@ movimento_aleatorio_buraco <-
       )
     
     desenhar(coord_obj = coordenada_atual_carro, add_carro = TRUE, graphic = graphic) # desenho do carro
-    
-    contador_geracoes <- 1L
-    
+
     # Não poderá ser feita por funcional, uma vez que contém a aleatoriedade 
     # da colisão, que poderá eventualmente ocorrer.
+    
     for(x_buraco in coordenada_atual_buraco[1L]:coordenada_atual_carro[1L]){
-      
+
       desenhar(
         coord_obj = c(coordenada_atual_buraco[1L], coordenada_atual_buraco[2L]),
         add_carro = FALSE,
         b_cinza = TRUE,
         graphic = graphic
       )
-      
-      # Desenhando um buraco e salvando na variável global a posição 
+
+      # Desenhando um buraco e salvando na variável global a posição
       # atual do buraco.
       coordenada_atual_buraco <<- c(x_buraco, coordenada_atual_buraco[2L])
-      
+
       desenhar(
         coord_obj = c(x_buraco, coordenada_atual_buraco[2L]),
         add_carro = FALSE,
         graphic = graphic
       )
-      
-      recursos <- 
+
+      recursos <-
         c(
           1L,
           coordenada_atual_carro[1L],
@@ -225,17 +222,17 @@ movimento_aleatorio_buraco <-
           coordenada_atual_buraco[2L],
           dist(rbind(coordenada_atual_buraco, coordenada_atual_carro))
         )
-      
+
       movimento_carro(
         decisao = neural(x = recursos, w_1 = w_1, w_2 = w_2),
         sensibilidade = sensibilidade,
         graphic = graphic
       )
-      
+
       # Não é preciso salvar novamente essa coordenada. O carro está sendo
       # desenhado novamente para não ser removido nas iterações de movimento do
       # buraco.
-      
+
       if(graphic)
         polygon(
           x = c(0,coordenada_atual_carro[1L] + 0.1 , coordenada_atual_carro[1L] + 0.1, 0),
@@ -243,9 +240,9 @@ movimento_aleatorio_buraco <-
           col = "#4d4d4d",
           border = NA
         )
-      
+
       desenhar(coord_obj = coordenada_atual_carro, add_carro = TRUE, graphic = graphic) # desenho do carro
-      
+
       if(is.na(check_colisao(sensibilidade = sensibilidade, start_carro = coordenada_atual_carro, som = som, graphic = graphic))){
         break
       }

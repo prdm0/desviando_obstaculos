@@ -12,8 +12,8 @@ library(pbmcapply)
 rm(list = ls(all = TRUE))
 
 # Chamando arquivos
-source("rede.R")
-source("genetic.R")
+source("R/rede.R")
+source("R/genetic.R")
 
 # Os recrusos (entrada da rede):
 #   1 - Posição atual do carro
@@ -95,7 +95,7 @@ movimento_aleatorio_buraco <-
         sample(x = 7:25L, size = 1L)
       )
     
-    contador_geracoes <- 1L
+    sucesso <- 1L
     
     # Não poderá ser feita por funcional, uma vez que contém a aleatoriedade 
     # da colisão, que poderá eventualmente ocorrer.
@@ -130,7 +130,12 @@ movimento_aleatorio_buraco <-
         break
       }
     } # Fim do loop de movimento do buraco
-    return(list(coordenada_atual_carro = coordenada_atual_carro, coordenada_atual_buraco = coordenada_atual_buraco))
+    return(
+      list(
+        coordenada_atual_carro = coordenada_atual_carro,
+        coordenada_atual_buraco = coordenada_atual_buraco
+      )
+    )
   }
 
 IA <-  

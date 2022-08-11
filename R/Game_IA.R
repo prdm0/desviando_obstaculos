@@ -1,4 +1,4 @@
-source("funcoes_auxiliares.R")
+source("R/funcoes_auxiliares.R")
 
 jogando <- 
   function(

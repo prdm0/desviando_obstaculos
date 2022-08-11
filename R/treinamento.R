@@ -1,4 +1,4 @@
-source("funcoes_auxiliares.R")
+source("R/funcoes_auxiliares.R")
 
 treinamento <- 
   function(
@@ -36,7 +36,7 @@ treinamento <-
         )
         
         if(is.na(check_colisao(sensibilidade, coordenada_atual_carro, som = FALSE, graphic = FALSE)))
-          break
+            break
         
         sucesso <- sucesso + 1L    
       } # Aqui termina o repeat
@@ -73,23 +73,25 @@ treinamento <-
 
 set.seed(0)
 
+n_neuronios <- 6L
+
 # Aleatorizando as matrizes de pessos
-array_w_1 <- array(data = NA, dim = c(6L, 6L, 2L)) # dois melhores
-array_w_2 <- array(data = NA, dim = c(6L, 3L, 2L)) # dois melhores
+array_w_1 <- array(data = NA, dim = c(n_neuronios, n_neuronios, 2L)) # dois melhores
+array_w_2 <- array(data = NA, dim = c(n_neuronios, 3L, 2L)) # dois melhores
 
 # número de sucessos dos dois melhores
 
 # c(primeiro_melhor, segundo_melhor)
-vetor_sucessos <- c(1L, 1L)
 
-w_1 <- matrix(runif(n = 6 * 6, 5, 10), ncol = 6L, nrow = 6L)
-w_2 <- matrix(runif(n = 6 * 3, 5, 10), ncol = 3L, nrow = 6L)
+w_1 <- matrix(runif(n = n_neuronios * n_neuronios, 5, 10), ncol = n_neuronios, nrow = n_neuronios)
+w_2 <- matrix(runif(n = n_neuronios * 3L, 5, 10), ncol = 3L, nrow = n_neuronios)
 
-array_w_1[ , , 1L] <- matrix(rnorm(n = 6 * 6, sd = 2), ncol = 6L, nrow = 6L)
-array_w_2[ , , 1L] <- matrix(rnorm(n = 6 * 3), ncol = 3L, nrow = 6L)
-array_w_1[ , , 2L] <- matrix(rnorm(n = 6 * 6), ncol = 6L, nrow = 6L) 
-array_w_2[ , , 2L] <- matrix(rnorm(n = 6 * 3), ncol = 3L, nrow = 6L)
+array_w_1[ , , 1L] <- matrix(rnorm(n = n_neuronios * n_neuronios, sd = 2), ncol = n_neuronios, nrow = n_neuronios)
+array_w_2[ , , 1L] <- matrix(rnorm(n = n_neuronios * 3L), ncol = 3L, nrow = n_neuronios)
+array_w_1[ , , 2L] <- matrix(rnorm(n = n_neuronios * n_neuronios), ncol = n_neuronios, nrow = n_neuronios) 
+array_w_2[ , , 2L] <- matrix(rnorm(n = n_neuronios * 3L), ncol = 3L, nrow = n_neuronios)
 
+vetor_sucessos <- c(1L, 1L) 
 treinamento(
   start_carro = c(20, 15),
   sensibilidade = 2,

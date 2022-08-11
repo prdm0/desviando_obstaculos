@@ -59,7 +59,7 @@ neural <- function(
     ) 
   } 
 
-  x_1 <- forward(x, w_1, fun = "relu", norm = norm, binary = TRUE)
+  x_1 <- forward(x, w_1, fun = "relu", norm = norm, binary = FALSE)
   probs <- forward(x_1, w_2, fun = "softmax", norm = FALSE)
   
   return(classes[which.max(probs)])

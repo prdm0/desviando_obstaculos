@@ -46,8 +46,8 @@ ga <- function(
   # A mutação ocorrerá trocando o sinal de uma linha de w_1 e w_2
   if(sample(c(TRUE, FALSE), size = 1L, prob = c(prob_mutation, 1 - prob_mutation))){
     linha <- sample(1L:dim_w_1[1L], size = 2L)
-    w_1_melhor[linha ,] <- -1 * w_1_melhor[linha , ]
-    w_2_melhor[linha ,] <- -1 * w_2_melhor[linha , ] 
+    w_1_melhor[linha ,] <- -1 * w_1_melhor[linha , ] |> tan()
+    w_2_melhor[linha ,] <- -1 * w_2_melhor[linha , ] |> tan()
   }
   
   return(list(ga_w_1 = w_1_melhor, ga_w_2 = w_2_melhor))
