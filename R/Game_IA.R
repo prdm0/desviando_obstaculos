@@ -4,6 +4,7 @@ jogando <-
   function(
     start_carro = c(20, 15),
     sensibilidade = 2L,
+    fun = "gaussian",
     eixos = TRUE,
     som = TRUE
   ){
@@ -24,6 +25,7 @@ jogando <-
     IA(
       sensibilidade = sensibilidade,
       start_carro = start_carro,
+      fun = fun,
       som = som
     )
     
@@ -60,4 +62,10 @@ jogando <-
   sucesso
 }
 
-jogando(start_carro = c(20,20), eixos = FALSE)
+jogando(
+  start_carro = c(20,20),
+  sensibilidade = 2L,
+  fun = "gaussian",
+  eixos = FALSE,
+  som = FALSE
+)

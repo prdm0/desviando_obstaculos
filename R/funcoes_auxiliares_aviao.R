@@ -32,6 +32,8 @@ raster_buraco <- magick::image_read(path = "imagens/buraco_branco.png")
 
 rip <- magick::image_read(path = "imagens/rip.png")
 
+raster_muro <- magick::image_read(path = "imagens/muro.png")
+
 coordenada_atual_carro <- c(20, 15)
 coordenada_atual_buraco <- double(length = 2L)
 distancia_carro_buraco <- double(length = 1L)
@@ -90,6 +92,22 @@ backgroud <- function(eixos = FALSE) {
   if(eixos) {
     axis(1L)
     axis(2L)
+  }
+}
+
+desenhar_muro <- function(x, apagar = FALSE){
+  
+  y <- 5
+  
+  if(apagar){
+    polygon(
+      x = c(83.6, 90, 90, 83.6),
+      y = c(5, 5, 25.05, 25.05),
+      col = "#4d4d4d",
+      border = NA
+    )
+  }else{
+    rasterImage(raster_muro, x + xinch(1), y + yinch(5.646), x, y) 
   }
 }
 
