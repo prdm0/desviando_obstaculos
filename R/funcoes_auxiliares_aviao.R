@@ -10,8 +10,8 @@ library(pbmcapply)
 rm(list = ls(all = TRUE))
 
 # Chamando arquivos
-source("R/rede.R")
-source("R/genetic.R")
+source("R/rede_aviao.R")
+source("R/genetic_aviao.R")
 
 # Os recrusos (entrada da rede):
 #   1 - Posição atual do carro
@@ -97,11 +97,11 @@ backgroud <- function(eixos = FALSE) {
 
 desenhar_muro <- function(x, apagar = FALSE){
   
-  y <- 5
+  y <- 5L
   
   if(apagar){
     polygon(
-      x = c(83.6, 90, 90, 83.6),
+      x = c(x - 1.4, x + 6, x + 6, x - 1.4),
       y = c(5, 5, 25.05, 25.05),
       col = "#4d4d4d",
       border = NA

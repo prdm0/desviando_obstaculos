@@ -90,8 +90,8 @@ w_2 <- melhor_w_2
 
 array_w_1[ , , 1L] <- w_1
 array_w_2[ , , 1L] <- w_2
-array_w_1[ , , 2L] <- w_1
-array_w_2[ , , 2L] <- w_2
+array_w_1[ , , 2L] <- w_1 + 0.1
+array_w_2[ , , 2L] <- w_2 + 0.2
 
 vetor_sucessos <- c(1L, 1L) 
 
@@ -99,6 +99,6 @@ treinamento(
   start_carro = c(20, 15),
   sensibilidade = 2L,
   fun = "gaussian",
-  epocas = "100000",
+  epocas = "1000",
   path = "rede_treinada/"
 )

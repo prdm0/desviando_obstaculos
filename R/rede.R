@@ -35,6 +35,12 @@ relu_cos <- function(x) {
   max(0, x) + cos(x) 
 }
 
+hard_tanh <- function(x){
+  max(-1, min(1, x))
+}
+
+hard_tanh_vec <- Vectorize(FUN = hard_tanh, vectorize.args = "x")
+
 normalizar <- function(x)
   (x - mean(x))/sd(x)
 
