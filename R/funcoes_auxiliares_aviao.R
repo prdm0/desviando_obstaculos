@@ -77,7 +77,7 @@ backgroud <- function(eixos = FALSE) {
   plot.window(xlim = c(1, 100), ylim = c(1, 30))
   
   title("Rede Neural Treinada com Algoritmo Genético", cex.main = 2.5)
-  mtext("O carro usará a Inteligência Artificial (IA) para tomar a decisão de decidir em desviar dos obstáculos aleatórios", cex = 1.5)
+  mtext("O carro usará a Inteligência Artificial (IA) para tomar a decisão de desviar dos obstáculos aleatórios", cex = 1.5)
   # Polígono: desenho do asfalto
   polygon(
     x = c(-10, 120, 120, -10),
