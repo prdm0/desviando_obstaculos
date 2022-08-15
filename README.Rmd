@@ -5,7 +5,7 @@ output: github_document
 # Rede Neural Evolutiva Aplicada a um Simples Joguinho de Carro
 
 
-```{r, out.width = "500px", echo = FALSE, fig.align='center', fig.cap = "Rede neural evolutiva comando o carro."}
+```{r, out.width = "500px", echo = FALSE, fig.align = 'center', fig.cap = "Rede neural evolutiva comando o carro."}
 knitr::include_graphics("imagens/animacao.gif")
 ```
 

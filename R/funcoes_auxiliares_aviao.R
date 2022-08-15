@@ -3,7 +3,6 @@ library(magick)
 library(beepr)
 library(glue)
 library(pbapply)
-library(furrr)
 library(pbmcapply)
 
 # Limopando memória
@@ -81,7 +80,7 @@ backgroud <- function(eixos = FALSE) {
   # Polígono: desenho do asfalto
   polygon(
     x = c(-10, 120, 120, -10),
-    y = c(4.93, 4.93, 25.05, 25.05),
+    y = c(4.9643, 4.9643, 25.06, 25.06),
     col = "#4d4d4d",
     border = NA
   )
@@ -101,14 +100,22 @@ desenhar_muro <- function(x, apagar = FALSE){
   
   if(apagar){
     polygon(
-      x = c(x - 1.4, x + 6, x + 6, x - 1.4),
-      y = c(5, 5, 25.05, 25.05),
+      x = c(x - 0.01, x + 6, x + 6, x - 0.01),
+      y = c(5, 5, 25.056, 25.056),
       col = "#4d4d4d",
       border = NA
     )
   }else{
-    rasterImage(raster_muro, x + xinch(1), y + yinch(5.646), x, y) 
+    rasterImage(raster_muro, x + xinch(0.8), y + yinch(5.72), x, y) 
   }
+  
+  polygon(
+    x = c(x - 0.01, x + 6, x + 6, x - 0.01),
+    y = c(5, 5, 25.056, 25.056),
+    col = "#4d4d4d",
+    border = NA
+  )
+  
 }
 
 desenhar <- 
@@ -190,6 +197,25 @@ movimento_carro <- function(decisao, sensibilidade = 2L, graphic = TRUE){
   if(graphic){
     desenhar(coord_obj = coordenada_atual_carro, add_carro = TRUE, graphic = graphic)
   }
+}
+
+movimento_muro <- 
+  function(
+    w_1,
+    w_2,
+    fun = "gaussian",
+    graphic = TRUE,
+    som = TRUE
+  ){
+    
+    x_muro <- sample(x = (coordenada_atual_carro[1L] + 5L):100L, size = 1L)
+    
+    one_step <- function(x){
+      desenhar_muro(x, apagar = TRUE)
+      desenhar_muro(x, apagar = FALSE)
+    }
+    
+    purrr::walk(.x = x_muro:coordenada_atual_carro[1L], .f = one_step)
 }
 
 movimento_aleatorio_buraco <- 
